@@ -34,11 +34,10 @@ Setup and Installation
 Follow these steps to get the project running on your local machine.
 1. Clone the Repository
 Generated bash
-git clone https://github.com/your-username/your-repo-name.git
-cd document-analysis-hub
-Use code with caution.
-Bash
-2. (Recommended) Create and Activate a Virtual Environment
+git clone https://github.com/Paul1031zhang1031/project1/
+cd project1
+
+2. (Recommended and optional) Create and Activate a Virtual Environment
 Generated bash
 # On macOS/Linux
 python3 -m venv venv
@@ -47,13 +46,11 @@ source venv/bin/activate
 # On Windows
 python -m venv venv
 .\venv\Scripts\activate
-Use code with caution.
-Bash
+
 3. Install Dependencies
-Generated bash
 pip install -r requirements.txt
-Use code with caution.
-Bash
+
+
 4. Add API Keys
 This application requires API keys for Groq (for LLM inference) and API Ninjas (for similarity scores).
 Create a folder named .streamlit in the root of your project directory.
@@ -64,14 +61,11 @@ Generated toml
 
 GROQ_API_KEY = "your_groq_api_key_here"
 API_NINJA_KEY = "your_api_ninjas_key_here"
-Use code with caution.
-Toml
+
 5. Run the Streamlit App
-Generated bash
-streamlit run app_v2.py
-Use code with caution.
-Bash
+streamlit run app.py
 Your web browser should open automatically with the running application.
+
 How to Use
 Thematic Document Q&A
 Select the "Thematic Document Q&A" workflow.
