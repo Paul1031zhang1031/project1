@@ -4,5 +4,11 @@
 ├── e_rouge.py          # summary evaluation by hugging face evaluation 
 ├── e_similarity.py     # summary evaluation by similarity
 ├── e_qa.py             # qa evaluation by similarity
+├── requirements.txt
+├── README.md       
+├── .gitignore       
+└── LICENSE          
+├── data for test/
 └── .streamlit/
     └── secrets.toml    # To store API keys securely.
+
