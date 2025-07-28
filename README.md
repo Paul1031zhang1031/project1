@@ -13,10 +13,11 @@ Advanced Visualizations:
 Generates similarity graphs (digraphs) using NetworkX to visually represent the "closeness" of model outputs, highlighting clusters and outliers.
 Plots ROUGE scores for easy comparison.
 Robust Q&A: For large document sections, the Q&A tool uses on-the-fly semantic search to find the most relevant paragraphs within the section, providing the LLM with a highly focused and accurate context.
+
 Project Structure
 The project is organized into modular Python scripts, each with a specific responsibility.
-Generated code
-document-analysis-hub/
+#
+project1/
 ├── .streamlit/
 │   └── secrets.toml        # Securely stores API keys for Groq and API Ninjas.
 ├── app.py               # The main Streamlit application file; handles UI and state.
@@ -28,6 +29,7 @@ document-analysis-hub/
 ├── e_graph.py              # Generates the NetworkX similarity and consensus graphs.
 ├── README.md               # This documentation file.
 └── requirements.txt        # A list of all necessary Python dependencies.
+#
 Use code with caution.
 Setup and Installation
 Follow these steps to get the project running on your local machine.
