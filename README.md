@@ -18,7 +18,7 @@ Project Structure
 The project is organized into modular Python scripts, each with a specific responsibility.
 project1/
 - streamlit
-- - secrets.toml           # Securely stores API keys for Groq and API Ninjas.
+- -secrets.toml           # Securely stores API keys for Groq and API Ninjas.
 - app.py                  # The main Streamlit application file; handles UI and state.
 - chat.py                 # Core logic engine for summarization and Q&A.
 - summarizer.py           # Utility for PDF text extraction.
