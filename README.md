@@ -19,9 +19,9 @@ Generated code
 document-analysis-hub/
 ├── .streamlit/
 │   └── secrets.toml        # Securely stores API keys for Groq and API Ninjas.
-├── app_v2.py               # The main Streamlit application file; handles UI and state.
-├── chat_v2.py              # Core logic engine for summarization and Q&A.
-├── summarizer_v2.py        # Utility for PDF text extraction.
+├── app.py               # The main Streamlit application file; handles UI and state.
+├── chat.py              # Core logic engine for summarization and Q&A.
+├── summarizer.py        # Utility for PDF text extraction.
 ├── e_qa.py                 # Module for comparing Q&A answers.
 ├── e_rouge.py              # Module for calculating and plotting ROUGE scores.
 ├── e_similarity.py         # Utility for getting semantic similarity scores.
