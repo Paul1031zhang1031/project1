@@ -17,11 +17,11 @@ Robust Q&A: For large document sections, the Q&A tool uses on-the-fly semantic s
 Project Structure
 The project is organized into modular Python scripts, each with a specific responsibility.
 project1/
-- streamlit/
--- secrets.toml        # Securely stores API keys for Groq and API Ninjas.
-- app.py               # The main Streamlit application file; handles UI and state.
-- chat.py              # Core logic engine for summarization and Q&A.
-- summarizer.py        # Utility for PDF text extraction.
+- streamlit
+-- secrets.toml           # Securely stores API keys for Groq and API Ninjas.
+- app.py                  # The main Streamlit application file; handles UI and state.
+- chat.py                 # Core logic engine for summarization and Q&A.
+- summarizer.py           # Utility for PDF text extraction.
 - e_qa.py                 # Module for comparing Q&A answers.
 - e_rouge.py              # Module for calculating and plotting ROUGE scores.
 - e_similarity.py         # Utility for getting semantic similarity scores.
