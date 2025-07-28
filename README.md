@@ -13,7 +13,21 @@ This project is a multi-functional Streamlit application designed for advanced t
   - **Similarity Scores** (`e_similarity.py`): Measure semantic similarity between texts without references.
 
 ## Project Structure
-<img width="2507" height="533" alt="1753667217063" src="https://github.com/user-attachments/assets/6b1a2cc2-4a9d-4d4e-ad78-63e0059f760f" />
+
+project1/
+├── .streamlit/
+│ └── secrets.toml # To store API keys securely.
+├── data for test/ # Contains sample data for testing.
+├── app.py # Main Streamlit app that combines all features.
+├── chat.py # Handles the logic for chatting with documents.
+├── summarizer.py # Core logic for summarization and Q&A.
+├── e_qa.py # QA evaluation module using similarity.
+├── e_rouge.py # Summary evaluation module using ROUGE scores.
+├── e_similarity.py # Summary evaluation module using similarity.
+├── .gitignore # Specifies files for Git to ignore.
+├── LICENSE # The project's open-source license.
+├── README.md # This documentation file.
+└── requirements.txt # List of project dependencies.
 
 # AI-Powered Text Analysis Toolkit
 
