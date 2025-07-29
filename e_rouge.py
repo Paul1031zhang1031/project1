@@ -21,15 +21,9 @@ def compute_rouge_scores(summaries: dict, reference: str) -> pd.DataFrame:
     return pd.DataFrame({"rougeL": scores}, index=model_names)
 
 def plot_rouge_scores(rouge_df: pd.DataFrame):
-    """
-    Plot a bar chart of ROUGE-L scores.
 
-    Args:
-        rouge_df: DataFrame with 'rougeL' scores indexed by model name
-
-    Returns:
-        A matplotlib Figure object
-    """
+    #Plot a bar chart of ROUGE-L scores.
+   
     x = np.arange(len(rouge_df))
     fig, ax = plt.subplots(figsize=(8, 5))
     ax.bar(x, rouge_df["rougeL"], color="skyblue")
@@ -43,12 +37,10 @@ def plot_rouge_scores(rouge_df: pd.DataFrame):
     return fig
 
 def compute_and_plot_rouge(summaries: dict, reference: str):
-    """
-    Compute and plot ROUGE-L scores for model summaries.
+ 
+    #Compute and plot ROUGE-L scores for model summaries.
 
-    Returns:
-        Tuple of (DataFrame, matplotlib Figure)
-    """
+
     df = compute_rouge_scores(summaries, reference)
     fig = plot_rouge_scores(df)
     return df, fig

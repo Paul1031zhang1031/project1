@@ -1,4 +1,4 @@
-# qa_comparator.py (New and Improved Version)
+# qa_comparator.py 
 
 import pandas as pd
 import seaborn as sns
@@ -10,7 +10,7 @@ import time
 from summarizer import ask_question as eval_ask_question
 
 def get_api_ninja_similarity(text1: str, text2: str, api_key: str):
-    """Helper function to call the API Ninjas Similarity endpoint."""
+    #Helper function to call the API Ninjas Similarity endpoint.
     api_url = 'https://api.api-ninjas.com/v1/textsimilarity'
     headers = {'X-Api-Key': api_key}
     payload = {'text_1': text1, 'text_2': text2}
@@ -23,9 +23,9 @@ def get_api_ninja_similarity(text1: str, text2: str, api_key: str):
         return 0.0
 
 def compare_model_answers(client, pdf_text: str, question: str, models: list, api_ninja_key: str):
-    """
-    Generates answers, compares them, calculates consensus, and returns a rich report dictionary.
-    """
+   
+    #Generates answers, compares them, calculates consensus, and returns a rich report dictionary.
+    
     # 1. Get answers from all models
     answers = {model: eval_ask_question(client, pdf_text, question, model) for model in models}
     model_names = list(answers.keys())

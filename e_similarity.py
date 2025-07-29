@@ -1,4 +1,3 @@
-# e_similarity.py
 import requests
 
 def get_similarity_score(text1: str, text2: str, api_key: str) -> float:
