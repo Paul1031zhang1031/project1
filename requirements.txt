@@ -1,0 +1,11 @@
+streamlit
+groq
+pymupdf
+pandas
+requests
+seaborn
+matplotlib
+evaluate
+rouge_score
+scikit-learn
+sentence-transformers

@@ -1,6 +1,6 @@
-    [theme]
-    primaryColor="#F63366"
-    backgroundColor="#FFFFFF"
-    secondaryBackgroundColor="#F0F2F6"
-    textColor="#262730"
-    font="sans serif"
+[theme]
+primaryColor="#BFA2DB"                # Soft lavender
+backgroundColor="#2D254C"             # Muted violet/navy base
+secondaryBackgroundColor="#443C5E"    # Gentle contrast for cards
+textColor="#ECECEC"                   # Light gray-white for easy reading
+font="sans serif"

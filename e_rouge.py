@@ -3,19 +3,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+#Compute ROUGE-L scores for multiple summaries against a reference.
 def compute_rouge_scores(summaries: dict, reference: str) -> pd.DataFrame:
-    """
-    Compute ROUGE scores for multiple summaries against a reference.
+   
 
-    Returns a DataFrame indexed by model names with rouge1, rouge2, rougeL scores.
-    """
     rouge = evaluate.load("rouge")
-
-    rouge_scores = {
-        "rouge1": [],
-        "rouge2": [],
-        "rougeL": []
-    }
+    scores = []
     model_names = []
 
     for model_name, summary in summaries.items():
@@ -23,38 +16,38 @@ def compute_rouge_scores(summaries: dict, reference: str) -> pd.DataFrame:
             continue
         result = rouge.compute(predictions=[summary], references=[reference])
         model_names.append(model_name)
-        rouge_scores["rouge1"].append(result["rouge1"])
-        rouge_scores["rouge2"].append(result["rouge2"])
-        rouge_scores["rougeL"].append(result["rougeL"])
+        scores.append(result["rougeL"])
 
-    df = pd.DataFrame(rouge_scores, index=model_names)
-    return df
+    return pd.DataFrame({"rougeL": scores}, index=model_names)
 
 def plot_rouge_scores(rouge_df: pd.DataFrame):
     """
-    Given a DataFrame of ROUGE scores, plot a grouped bar chart and return the figure.
-    """
-    x = np.arange(len(rouge_df.index))
-    width = 0.25
+    Plot a bar chart of ROUGE-L scores.
 
+    Args:
+        rouge_df: DataFrame with 'rougeL' scores indexed by model name
+
+    Returns:
+        A matplotlib Figure object
+    """
+    x = np.arange(len(rouge_df))
     fig, ax = plt.subplots(figsize=(8, 5))
-    ax.bar(x - width, rouge_df["rouge1"], width, label="ROUGE-1")
-    ax.bar(x, rouge_df["rouge2"], width, label="ROUGE-2")
-    ax.bar(x + width, rouge_df["rougeL"], width, label="ROUGE-L")
+    ax.bar(x, rouge_df["rougeL"], color="skyblue")
 
     ax.set_xticks(x)
-    ax.set_xticklabels(rouge_df.index)
-    ax.set_ylabel("ROUGE Score")
-    ax.set_title("ROUGE Scores of Summaries by Model")
-    ax.legend()
+    ax.set_xticklabels(rouge_df.index, rotation=45, ha="right")
+    ax.set_ylabel("ROUGE-L Score")
+    ax.set_title("ROUGE-L Scores by Model")
     fig.tight_layout()
 
     return fig
 
 def compute_and_plot_rouge(summaries: dict, reference: str):
     """
-    Compute ROUGE scores and plot results.
-    Returns (DataFrame, matplotlib.figure.Figure)
+    Compute and plot ROUGE-L scores for model summaries.
+
+    Returns:
+        Tuple of (DataFrame, matplotlib Figure)
     """
     df = compute_rouge_scores(summaries, reference)
     fig = plot_rouge_scores(df)

@@ -1,0 +1,2 @@
+﻿SUMMARY:
+Using national survey data, Davis et al. (2015) tested the assertion that “an apple a day keeps the doctor away” and did not find statistically significant evidence to support this hypothesis. While people who consumed apples were slightly less likely to use prescription medications, the study was unable to demonstrate a causal relationship between these variables.
