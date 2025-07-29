@@ -14,5 +14,5 @@ matplotlib
 # Evaluation Metrics
 evaluate
 rouge_score
-
+tiktoken
 # --- END OF CORRECTED requirements.txt ---
