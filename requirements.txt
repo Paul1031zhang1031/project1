@@ -1,11 +1,18 @@
+# --- START OF CORRECTED requirements.txt ---
+
+# Core Application & API Clients
 streamlit
 groq
 pymupdf
-pandas
 requests
+
+# Data Handling & Plotting
+pandas
 seaborn
 matplotlib
+
+# Evaluation Metrics
 evaluate
 rouge_score
-scikit-learn
-sentence-transformers
+
+# --- END OF CORRECTED requirements.txt ---

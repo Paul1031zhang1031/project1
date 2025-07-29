@@ -39,7 +39,12 @@ def split_text_into_chunks(text, max_tokens=1000):
     return chunks
 
 # --- Summarization ---
-def summarize_chunks(chunks, model, chunk_limit=5, client=None):
+def summarize_chunks(client, chunks, model, chunk_limit=5):
+    # FIX: Made client a required positional argument and added a guard clause.
+    if not client:
+        st.error("API Client not provided to summarize_chunks.")
+        return []
+        
     summaries = []
     for i, chunk in enumerate(chunks[:chunk_limit]):
         try:
@@ -59,13 +64,20 @@ def summarize_chunks(chunks, model, chunk_limit=5, client=None):
             continue
     return summaries
 
-def create_context_from_summaries(text, model_name="llama3-8b-8192", limit=5, client=None):
+def create_context_from_summaries(client, text, model_name="llama3-8b-8192", limit=5):
+    # FIX: Made client a required positional argument.
     chunks = split_text_into_chunks(text)
-    summaries = summarize_chunks(chunks, model=model_name, chunk_limit=limit, client=client)
+    # FIX: Pass the client to the corrected summarize_chunks function.
+    summaries = summarize_chunks(client, chunks, model=model_name, chunk_limit=limit)
     return "\n---\n".join(summaries)
 
 # --- Question Answering ---
-def ask_question(question, context, model_name, system_prompt="Answer the question based on the provided context.", client=None):
+def ask_question(client, question, context, model_name, system_prompt="Answer the question based on the provided context."):
+    # FIX: Made client a required positional argument and removed client=None from the end.
+    if not client:
+        st.error(f"API Client not provided to ask_question for model `{model_name}`.")
+        return "⚠️ Unable to generate answer due to an internal configuration error."
+        
     prompt = f"Context:\n{context}\n\nQuestion: {question}"
     token_count = num_tokens_from_string(prompt, model_name)
     st.info(f"🔢 Tokens in request: {token_count}")
@@ -83,5 +95,6 @@ def ask_question(question, context, model_name, system_prompt="Answer the questi
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
+        # FIX: Changed the error message slightly to distinguish from the original output, providing more clarity.
         st.error(f"❌ Error during question answering with model `{model_name}`: {e}")
-        return "⚠️ Unable to generate answer due to token limit or API error."
+        return f"⚠️ Unable to generate answer for model `{model_name}` due to an API error."

@@ -12,16 +12,16 @@ Compare to Golden Reference: Allows the user to upload or write a "perfect" refe
 Advanced Visualizations:
 Generates similarity graphs (digraphs) using NetworkX to visually represent the "closeness" of model outputs, highlighting clusters and outliers.
 Plots ROUGE scores for easy comparison.
-Robust Q&A: For large document sections, the Q&A tool uses on-the-fly semantic search to find the most relevant paragraphs within the section, providing the LLM with a highly focused and accurate context.
+Robust Q&A: For large document sections that exceed the context window, the Q&A tool uses an intelligent LLM-powered distillation process. It first prompts the model to extract only the most relevant information related to the question, then uses that focused context to generate a final, accurate answer.
 
 Project Structure
 The project is organized into modular Python scripts, each with a specific responsibility.
 project1/
-- streamlit
--  - secrets.toml           # Securely stores API keys for Groq and API Ninjas.
+- .streamlit/             # Configuration folder for Streamlit.
+-  - secrets.toml         # Securely stores API keys for Groq and API Ninjas.
 - app.py                  # The main Streamlit application file; handles UI and state.
 - chat.py                 # Core logic engine for summarization and Q&A.
-- summarizer.py           # Utility for PDF text extraction.
+- summarizer.py           # Utilities for PDF text extraction and helper functions.
 - e_qa.py                 # Module for comparing Q&A answers.
 - e_rouge.py              # Module for calculating and plotting ROUGE scores.
 - e_similarity.py         # Utility for getting semantic similarity scores.

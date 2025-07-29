@@ -123,7 +123,7 @@ if st.session_state.active_tab == "Thematic Document Q&A":
             st.session_state.toc_summary_result = None
             st.session_state.toc_chat_history = []
             st.rerun()
-        model_name = st.selectbox("Choose a Model", ("gemma-7b-it", "llama3-8b-8192", "llama3-70b-8192"), key="toc_model_sel")
+        model_name = st.selectbox("Choose a Model", ("gemma2-9b-it","llama3-8b-8192", "llama3-70b-8192"), key="toc_model_sel")
         st.divider()
         st.subheader(f"1. Summarize Section: '{st.session_state.active_section_title}'")
         if st.button("Summarize this Section", key="summarize_btn"):
