@@ -19,7 +19,7 @@ def ext_text_from_pdf(file):
     return text
 
 # --- Chunking ---
-def split_text_into_chunks(text, max_tokens=1000):
+'''delete def split_text_into_chunks(text, max_tokens=1000):
     tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
     sentences = text.split(". ")
     chunks, current_chunk = [], ""
@@ -38,7 +38,7 @@ def split_text_into_chunks(text, max_tokens=1000):
 
     return chunks
 
-'''deleted def summarize_chunks(client, chunks, model, chunk_limit=5):
+deleted def summarize_chunks(client, chunks, model, chunk_limit=5):
     # FIX: Made client a required positional argument and added a guard clause.
     if not client:
         st.error("API Client not provided to summarize_chunks.")
