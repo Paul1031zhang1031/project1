@@ -1,4 +1,3 @@
-# app_v2.py
 import streamlit as st
 import fitz
 from groq import Groq

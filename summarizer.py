@@ -1,7 +1,7 @@
 import fitz
 import streamlit as st
 import numpy as np
-from transformers import AutoTokenizer
+
 from chat import num_tokens_from_string
 import time
 
@@ -38,8 +38,7 @@ def split_text_into_chunks(text, max_tokens=1000):
 
     return chunks
 
-# --- Summarization ---
-def summarize_chunks(client, chunks, model, chunk_limit=5):
+'''deleted def summarize_chunks(client, chunks, model, chunk_limit=5):
     # FIX: Made client a required positional argument and added a guard clause.
     if not client:
         st.error("API Client not provided to summarize_chunks.")
@@ -62,14 +61,14 @@ def summarize_chunks(client, chunks, model, chunk_limit=5):
         except Exception as e:
             st.error(f"❌ Error summarizing chunk {i+1}: {e}")
             continue
-    return summaries
+    return summaries'''
 
-def create_context_from_summaries(client, text, model_name="llama3-8b-8192", limit=5):
+'''delelted :def create_context_from_summaries(client, text, model_name="llama3-8b-8192", limit=5):
     # FIX: Made client a required positional argument.
     chunks = split_text_into_chunks(text)
     # FIX: Pass the client to the corrected summarize_chunks function.
     summaries = summarize_chunks(client, chunks, model=model_name, chunk_limit=limit)
-    return "\n---\n".join(summaries)
+    return "\n---\n".join(summaries)'''
 
 # --- Question Answering ---
 def ask_question(client, question, context, model_name, system_prompt="Answer the question based on the provided context."):
