@@ -53,12 +53,19 @@ def run_consensus_evaluation(client, models: list, task_type, context, prompt):
 
     # If we only have one model (e.g., for summarization), skip consensus and prepare for logging.
     if len(models) == 1:
-        best_result = next(iter(results.values()))
-        best_model_name = models[0]
-        avg_scores = {} # No scores to calculate
-        matrix_string = "N/A (Single Model)"
-        sim_matrix = None
-    # Otherwise, run the full consensus evaluation.
+        best_result = next(iter(results.values()), "No result generated.")
+        log_dir = Path("logs")
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        report_filename = log_dir / f"report_{task_type}_{timestamp}.txt"
+        report_content = f"--- Single Model Report ---\n"
+        report_content += f"Timestamp: {timestamp}\nTask Type: {task_type.upper()}\nModel: {models[0]}\n\n"
+        report_content += f"--- RESULT ---\n{best_result}\n"
+        with open(report_filename, "w", encoding="utf-8") as f:
+            f.write(report_content)   
+        print(f"Single model evaluation complete. Report saved to the '{log_dir.name}' folder.")
+        # Return immediately.
+        return {"best_result": best_result}
+    
     else:
         scores = {}
         valid_results = {m: r for m, r in results.items() if isinstance(r, str) and not r.startswith("An error")}
