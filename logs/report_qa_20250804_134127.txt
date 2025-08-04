@@ -1,0 +1,43 @@
+--- Consensus Evaluation Report ---
+Timestamp: 20250804_134127
+Task Type: QA
+Prompt/Theme: can you list the  kinds of rules  for  graduate  students 
+
+--- BEST RESULT (from llama3-70b-8192) ---
+I'm sorry, the answer could not be found in the document. The provided context does not mention specific rules for graduate students. It provides an overview of the Graduate Certificate in Business program, including its objective, admission requirements, course structure, and course descriptions. However, it does not list rules for graduate students.
+
+--- Consensus Scores ---
+- llama3-70b-8192: 0.7270
+- gemma2-9b-it: 0.6508
+- llama3-8b-8192: 0.6193
+
+--- Pairwise Similarity Matrix ---
+                 gemma2-9b-it  llama3-8b-8192  llama3-70b-8192
+gemma2-9b-it           1.0000          0.5431           0.7584
+llama3-8b-8192         0.5431          1.0000           0.6955
+llama3-70b-8192        0.7584          0.6955           1.0000
+
+--- All Model Outputs ---
+
+--- Output from gemma2-9b-it ---
+The provided text focuses on program overviews for a Graduate Certificate in Business and programs leading to a Master of Education in Leadership, Societies, and Languages. 
+
+Specifically regarding rules for graduate students, the document mentions these points:
+
+* **Graduate Certificate in Business:**
+    * Applicants must have an undergraduate degree (non-business) and a minimum 70% average.
+    * Students must obtain at least 65% in each required course.
+    * Courses cannot be repeated more than once.
+* **M.Ed. and M.A. in Education:**  
+    *  The document doesn't specify rules for these programs but states eligibility for those who are certified teachers, educational administrators, or hold a first undergraduate degree.
+
+
+
+Keep in mind this information is limited to the provided context. Other rules for graduate students may exist but are not included here. 
+
+
+--- Output from llama3-8b-8192 ---
+I'm sorry, the answer could not be found in the document. There is no mention of "kinds of rules" for graduate students in the provided context.
+
+--- Output from llama3-70b-8192 ---
+I'm sorry, the answer could not be found in the document. The provided context does not mention specific rules for graduate students. It provides an overview of the Graduate Certificate in Business program, including its objective, admission requirements, course structure, and course descriptions. However, it does not list rules for graduate students.

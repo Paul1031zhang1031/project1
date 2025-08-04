@@ -1,3 +1,5 @@
+# requirements.txt
+
 # Core Web Framework & API Clients
 streamlit
 groq
@@ -13,9 +15,5 @@ scikit-learn
 pandas
 numpy
 
-# Visualization and Graph Analysis (from evaluation.py)
-matplotlib
-networkx
-
-# UI Assets and System Utilities
+# UI Assets
 Pillow
