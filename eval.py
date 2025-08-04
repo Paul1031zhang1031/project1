@@ -1,3 +1,5 @@
+# evaluation.py
+
 import streamlit as st
 import itertools
 import pandas as pd
@@ -9,39 +11,15 @@ from pathlib import Path
 # Import the core AI functions from your chat module
 from chat import get_summary, get_qa_answer
 
-# ==============================================================================
-# HELPER FUNCTION
-# ==============================================================================
-def get_similarity_score(text1: str, text2: str) -> float:
-    """Calculates semantic similarity using the API Ninjas service."""
-    try:
-        api_key = st.secrets["API_NINJA_KEY"]
-    except Exception:
-        print("Warning: API_NINJA_KEY not found in Streamlit secrets.")
-        return 0.0
-    
-    api_url = 'https://api.api-ninjas.com/v1/textsimilarity'
-    headers = {'X-Api-Key': api_key}
-    body = {'text_1': text1[:4900], 'text_2': text2[:4900]}
-    
-    try:
-        response = requests.post(api_url, headers=headers, json=body)
-        response.raise_for_status()
-        return response.json().get('similarity', 0.0)
-    except requests.exceptions.RequestException:
-        return 0.0
+# ... (get_similarity_score function is correct and does not need to be changed) ...
 
-# ==============================================================================
-# MAIN EVALUATION FUNCTION
-# ==============================================================================
 def run_consensus_evaluation(client, models: list, task_type, context, prompt):
     """
     If multiple models are provided, runs a full consensus evaluation.
-    If only one model is provided, it runs that single model.
-    Saves a detailed report including a similarity matrix.
+    If only one model is provided, it runs that single model and returns early.
     """
     
-    # 1. Get result(s) from all provided models
+    # --- Step 1: Get result(s) from all provided models ---
     results = {}
     for model in models:
         if task_type == 'qa':
@@ -51,9 +29,11 @@ def run_consensus_evaluation(client, models: list, task_type, context, prompt):
         results[model] = result
         time.sleep(1)
 
-    # If we only have one model (e.g., for summarization), skip consensus and prepare for logging.
+    # --- Case 1: Single Model (for fast summarization) ---
     if len(models) == 1:
         best_result = next(iter(results.values()), "No result generated.")
+        
+        # Create a simple log for the single-model run
         log_dir = Path("logs")
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         report_filename = log_dir / f"report_{task_type}_{timestamp}.txt"
@@ -61,11 +41,14 @@ def run_consensus_evaluation(client, models: list, task_type, context, prompt):
         report_content += f"Timestamp: {timestamp}\nTask Type: {task_type.upper()}\nModel: {models[0]}\n\n"
         report_content += f"--- RESULT ---\n{best_result}\n"
         with open(report_filename, "w", encoding="utf-8") as f:
-            f.write(report_content)   
-        print(f"Single model evaluation complete. Report saved to the '{log_dir.name}' folder.")
+            f.write(report_content)
+            
+        print(f"Single model evaluation complete. Report saved.")
+        
         # Return immediately.
         return {"best_result": best_result}
     
+    # --- Case 2: Multiple Models (for robust Q&A) ---
     else:
         scores = {}
         valid_results = {m: r for m, r in results.items() if isinstance(r, str) and not r.startswith("An error")}
@@ -85,7 +68,6 @@ def run_consensus_evaluation(client, models: list, task_type, context, prompt):
         best_model_name = max(avg_scores, key=avg_scores.get)
         best_result = results[best_model_name]
 
-        # Create the similarity matrix for the log
         sim_matrix = pd.DataFrame(index=models, columns=models, dtype=float)
         for (m1, m2), score in scores.items():
             sim_matrix.loc[m1, m2] = score
@@ -94,37 +76,30 @@ def run_consensus_evaluation(client, models: list, task_type, context, prompt):
             sim_matrix.loc[model, model] = 1.0
         matrix_string = sim_matrix.to_string(float_format="%.4f")
 
-    # --- LOGGING FOR BOTH CASES ---
-    log_dir = Path("logs")
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    report_filename = log_dir / f"report_{task_type}_{timestamp}.txt"
-    
-    report_content = f"--- Consensus Evaluation Report ---\n"
-    report_content += f"Timestamp: {timestamp}\nTask Type: {task_type.upper()}\nPrompt/Theme: {prompt}\n\n"
-    report_content += f"--- BEST RESULT (from {best_model_name}) ---\n{best_result}\n\n"
-    
-    if avg_scores: # Only add scores if they were calculated
+        # --- Logging is now INSIDE the else block ---
+        log_dir = Path("logs")
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        report_filename = log_dir / f"report_{task_type}_{timestamp}.txt"
+        
+        report_content = f"--- Consensus Evaluation Report ---\n"
+        report_content += f"Timestamp: {timestamp}\nTask Type: {task_type.upper()}\nPrompt/Theme: {prompt}\n\n"
+        report_content += f"--- BEST RESULT (from {best_model_name}) ---\n{best_result}\n\n"
         report_content += f"--- Consensus Scores ---\n"
         for model, score in sorted(avg_scores.items(), key=lambda item: item[1], reverse=True):
             report_content += f"- {model}: {score:.4f}\n"
         report_content += f"\n--- Pairwise Similarity Matrix ---\n{matrix_string}\n"
+        report_content += f"\n--- All Model Outputs ---\n"
+        for model, output in results.items():
+            report_content += f"\n--- Output from {model} ---\n{output}\n"
 
-    report_content += f"\n--- All Model Outputs ---\n"
-    for model, output in results.items():
-        report_content += f"\n--- Output from {model} ---\n{output}\n"
-
-    with open(report_filename, "w", encoding="utf-8") as f:
-        f.write(report_content)
-    
-    # Save the styled HTML matrix only if it was created (in consensus mode)
-    if sim_matrix is not None:
+        with open(report_filename, "w", encoding="utf-8") as f:
+            f.write(report_content)
+        
         matrix_html_filename = log_dir / f"matrix_{task_type}_{timestamp}.html"
         styled_matrix = sim_matrix.style.background_gradient(cmap='viridis', axis=None).format("{:.4f}")
         styled_matrix.to_html(matrix_html_filename)
 
-    print(f"Evaluation complete. Report saved to the '{log_dir.name}' folder.")
-    
-    # Return only the best result to the app
-    return {
-        "best_result": best_result
-    }
+        print(f"Consensus evaluation complete. Report saved.")
+        
+        # Return the best result for the multi-model case
+        return {"best_result": best_result}
