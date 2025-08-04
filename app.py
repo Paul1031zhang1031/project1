@@ -19,7 +19,7 @@ from eval import run_consensus_evaluation
 PDF_PATH = "./data/BU.pdf"
 TOC_PATH = "./data/toc.json"
 IMAGE_PATH = "./images/bishop_logo.png"
-MODELS_TO_EVALUATE = ["gemma2-9b-it", "llama3-8b-8192", "llama3-70b-8192"]
+MODELS_TO_EVALUATE = ["gemma2-9b-it", "llama3-70b-8192"]
 
 # We still need the original chunks for fallback, but SUMMARY_DATA is now key for Q&A
 SUMMARY_DATA = load_summary_data(PDF_PATH, TOC_PATH)
