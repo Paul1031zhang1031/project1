@@ -1,3 +1,5 @@
+
+
 This project is a powerful, interactive Streamlit application designed for both deep analysis of large documents and comprehensive evaluation of Large Language Models (LLMs). Powered by the high-speed Groq API, it offers a dual-workflow interface to tackle complex text-based tasks.
 The Thematic Q&A workflow allows users to parse large PDFs via their Table of Contents for focused summarization and question-answering. The Model Evaluation workflow provides a sophisticated suite of tools to compare LLM performance, featuring a unique, flexible system that supports both reference-free consensus analysis and traditional reference-based evaluation.
 Key Features
@@ -16,18 +18,25 @@ Robust Q&A: For large document sections that exceed the context window, the Q&A 
 
 Project Structure
 The project is organized into modular Python scripts, each with a specific responsibility.
-project1/
-- .streamlit/             # Configuration folder for Streamlit.
--  - secrets.toml         # Securely stores API keys for Groq and API Ninjas.
-- app.py                  # The main Streamlit application file; handles UI and state.
-- chat.py                 # Core logic engine for summarization and Q&A.
-- summarizer.py           # Utilities for PDF text extraction and helper functions.
-- e_qa.py                 # Module for comparing Q&A answers.
-- e_rouge.py              # Module for calculating and plotting ROUGE scores.
-- e_similarity.py         # Utility for getting semantic similarity scores.
-- e_graph.py              # Generates the NetworkX similarity and consensus graphs.
-- README.md               # This documentation file.
-- requirements.txt        # A list of all necessary Python dependencies.
+/project1/
+|
+|-- .streamlit/
+| |-- secrets.toml # Securely stores API keys (Groq, API Ninjas)
+|
+|-- /data/
+50
+| |-- BU.pdf # The source PDF document for analysis.
+| |-- toc.json # The manually created Table of Contents.
+|
+|
+|-- /logs/ # (Auto-generated) Stores evaluation reports.
+|
+|-- app.py # Main Streamlit application file (UI & Orche
+|-- qa.py # Backend logic for the Q&A engine.
+|-- summarizer_engine.py # Backend logic for data loading and summariz
+|-- chat.py # Core functions for interacting with the Gro
+|-- eval.py # Implements the multi-model consensus mechanism.
+|-- requirements.txt # Python dependencies for installation.
   
 
 Setup and Installation
@@ -66,17 +75,8 @@ API_NINJA_KEY = "your_api_ninjas_key_here"
 streamlit run app.py
 Your web browser should open automatically with the running application.
 
-How to Use
-Thematic Document Q&A
-Select the "Thematic Document Q&A" workflow.
-In the sidebar, upload a large PDF and paste its Table of Contents.
-Click "Process Document."
-Use the main dropdown to select the section you want to analyze.
-Click "Summarize this Section" to get a summary or use the chat box to ask specific questions about the selected section.
-Model Evaluation & Short Doc Analysis
-Select the "Model Evaluation" workflow.
-Upload a shorter PDF (1-20 pages).
-Use the "Quick Summarization" or "Ask & Compare Model Answers" tools for fast analysis.
-For a deep dive, navigate to the "Comprehensive Summary Evaluation" section.
-Choose "Reference-Free Consensus" to see how models compare to each other and find the best "consensus" answer.
-Choose "Compare to Golden Reference" to provide your own perfect summary and score models against it using ROUGE.
+Note:
+The application is also deployed online and can be accessed via the following URL:
+👉 https://project1-1-icrg.onrender.com/
+
+
