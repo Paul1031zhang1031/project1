@@ -81,6 +81,20 @@ def find_context_in_relevant_chapter(question: str, summary_data: list):
         top_k_indices = np.argsort(combined_scores)[-2:][::-1]
         relevant_context = "\n\n---\n\n".join([search_texts[i] for i in top_k_indices])
     else:
+        # Split the entire chapter text by paragraphs
+        paragraphs = re.split(r'\n\s*\n', chapter_text)
+        text_chunks = [chunk.strip() for chunk in paragraphs if len(chunk.strip()) > 100]
+        
+        # If there are no good paragraphs, just return the whole chapter text
+        if not text_chunks:
+            return chapter_text, best_chapter_title
+            
+        # Find the top 2 most relevant paragraphs
+        chunk_embeddings = model.encode(text_chunks)
+        similarities = cosine_similarity(question_embedding, chunk_embeddings)[0]
+        top_k_indices = np.argsort(similarities)[-2:][::-1]
+        relevant_context = "\n\n---\n\n".join([text_chunks[i] for i in top_k_indices])
+
         return chapter_text, best_chapter_title
 
     return relevant_context, best_chapter_title
