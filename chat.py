@@ -55,7 +55,10 @@ def get_qa_answer(client, question: str, context: str, model_name: str):
    
     if not client:
         return "API Client is not initialized."
-        
+    
+    if not context.strip() or len(context.strip().split()) < 30:
+       return "I'm sorry, the document does not contain enough relevant information to answer that question."
+    
     final_prompt = f"""
     Based ONLY on the context provided below, answer the user's question.
     If the answer is not found in the context, respond with "I'm sorry, the answer could not be found in the document."
