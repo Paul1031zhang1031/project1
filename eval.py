@@ -112,10 +112,9 @@ def run_consensus_evaluation(client, models: list, task_type, context, prompt):
         with open(report_filename, "w", encoding="utf-8") as f:
             f.write(report_content)
         
-        matrix_html_filename = log_dir / f"matrix_{task_type}_{timestamp}.html"
-        styled_matrix = sim_matrix.style.background_gradient(cmap='viridis', axis=None).format("{:.4f}")
-        styled_matrix.to_html(matrix_html_filename)
 
+        matrix_html_filename = log_dir / f"matrix_{task_type}_{timestamp}.html"
+        sim_matrix.to_html(matrix_html_filename)
         print(f"Consensus evaluation complete. Report saved.")
         
         # Return the best result for the multi-model case
