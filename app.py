@@ -129,7 +129,7 @@ else:
                 with st.spinner(f"Generating summary with {SUMMARY_MODEL}..."):
                     summary_report = run_consensus_evaluation(
                         client=groq_client,
-                        models=[SUMMARY_MODE],
+                        models=[SUMMARY_MODEL],
                         task_type='summary',
                         context=selected_theme_text,
                         prompt=selected_theme_title
