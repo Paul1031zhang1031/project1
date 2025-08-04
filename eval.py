@@ -10,8 +10,8 @@ import os
 from pathlib import Path
 import shutil
 
-# Import the core AI functions from your chat module
-from chat_v4 import get_summary, get_qa_answer
+
+from chat import get_summary, get_qa_answer
 
 # ==============================================================================
 # HELPER FUNCTIONS

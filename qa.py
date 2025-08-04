@@ -3,7 +3,7 @@ import fitz, re, os
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
-from sum_v4 import get_chapter_text
+from summarizer_engine import get_chapter_text
 
 @st.cache_resource
 def get_embedding_model():
@@ -24,13 +24,6 @@ def create_document_index(pdf_path: str):
     model = get_embedding_model()
     chunk_embeddings = model.encode(text_chunks)
     return text_chunks, chunk_embeddings
-
-'''def find_relevant_context(question: str, text_chunks: list, chunk_embeddings):
-    model = get_embedding_model()
-    question_embedding = model.encode([question])
-    similarities = cosine_similarity(question_embedding, chunk_embeddings)[0]
-    top_k_indices = np.argsort(similarities)[-2:][::-1]
-    return "\n---\n".join([text_chunks[i] for i in top_k_indices])'''
 
 def find_context_in_relevant_chapter(question: str, summary_data: list):
     """
