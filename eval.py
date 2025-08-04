@@ -104,8 +104,9 @@ def run_consensus_evaluation(client, models, task_type, context, prompt):
     with open(report_filename, "w", encoding="utf-8") as f:
         f.write(report_content)
     
-    # Save the styled matrix as an HTML file
-    styled_matrix = sim_matrix.style.background_gradient(cmap='viridis', axis=None).format("{:.4f}")
+    # Save the styled matrix 
+    
+    styled_matrix = sim_matrix.style.format("{:.4f}")  
     styled_matrix.to_html(matrix_html_filename)
 
     print(f"Evaluation complete. Report and matrix saved to the '{log_dir.name}' folder.")
