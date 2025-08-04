@@ -1,16 +1,21 @@
+# Core Web Framework & API Clients
+streamlit
+groq
+requests
 
-streamlit                        # For building the interactive web application
-groq                               # Official Python client for the Groq API
-requests                        # For making HTTP requests to the similarity API
+# PDF and NLP Utilities
+PyMuPDF           # For 'import fitz'
+tiktoken
+sentence-transformers
+scikit-learn
 
-PyMuPDF                      # (fitz) High-performance PDF parsing and text extracti
-tiktoken                         # For accurately counting tokens for context management
+# Data Handling & Numerical Operations
+pandas
+numpy
 
-# RAG Engine and Semantic Search
+# Visualization and Graph Analysis (from evaluation.py)
+matplotlib
+networkx
 
-sentence-transformers                # Powers the semantic search for the Q&A engine
-scikit-learn                                      # Used for calculating cosine similarity
-# Data Handling & UI Assets
-
-pandas                                         # Used for creating the similarity matrix in evaluation
-Pillow                                           # For handling the header image in the UI
+# UI Assets and System Utilities
+Pillow
