@@ -126,7 +126,7 @@ else:
             selected_theme_text = get_chapter_text(SUMMARY_DATA, selected_theme_title)
 
             if st.button("Generate Summary", use_container_width=True, key="summary_button"):
-                with st.spinner("Running consensus evaluation and saving reports to logs..."):
+                with st.spinner(f"Generating summary with {SUMMARY_MODEL}..."):
                     summary_report = run_consensus_evaluation(
                         client=groq_client,
                         models=SUMMARY_MODEL,
