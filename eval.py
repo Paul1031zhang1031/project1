@@ -8,10 +8,27 @@ import time
 from datetime import datetime
 from pathlib import Path
 
-# Import the core AI functions from your chat module
+
 from chat import get_summary, get_qa_answer
 
-# ... (get_similarity_score function is correct and does not need to be changed) ...
+def get_similarity_score(text1: str, text2: str) -> float:
+    """Calculates semantic similarity using the API Ninjas service."""
+    try:
+        api_key = st.secrets["API_NINJA_KEY"]
+    except Exception:
+        st.error("API_NINJA_KEY not found in secrets.toml. Cannot calculate similarity.")
+        return 0.0
+        
+    api_url = 'https://api.api-ninjas.com/v1/textsimilarity'
+    headers = {'X-Api-Key': api_key}
+    body = {'text_1': text1[:4900], 'text_2': text2[:4900]}
+    
+    try:
+        response = requests.post(api_url, headers=headers, json=body)
+        response.raise_for_status()
+        return response.json().get('similarity', 0.0)
+    except requests.exceptions.RequestException:
+        return 0.0
 
 def run_consensus_evaluation(client, models: list, task_type, context, prompt):
     """
