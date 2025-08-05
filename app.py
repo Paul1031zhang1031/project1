@@ -24,7 +24,7 @@ QA_MODELS_TO_EVALUATE = ["gemma2-9b-it", "llama3-8b-8192", "llama3-70b-8192"]
 # Based on Phase 1 results, llama3-8b is the best for summarization. We will use it exclusively.
 SUMMARY_MODEL = "llama3-70b-8192" 
 
-# We still need the original chunks for fallback, but SUMMARY_DATA is now key for Q&A
+
 SUMMARY_DATA = load_summary_data(PDF_PATH, TOC_PATH)
 TEXT_CHUNKS, CHUNK_EMBEDDINGS = create_document_index(PDF_PATH)
 

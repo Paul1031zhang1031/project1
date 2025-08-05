@@ -1,5 +1,3 @@
-# evaluation.py
-
 import streamlit as st
 import itertools
 import pandas as pd

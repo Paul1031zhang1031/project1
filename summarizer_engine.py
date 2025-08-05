@@ -1,4 +1,3 @@
-# --- sum_engine.py (The Summary Data Engine) ---
 import streamlit as st
 import fitz
 import json
