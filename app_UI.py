@@ -17,6 +17,8 @@ from style import create_header,apply_global_styles
 # ==============================================================================
 # DATA LOADING & INITIALIZATION
 # ==============================================================================
+st.set_page_config(page_title="Document Analysis Hub", layout="wide", page_icon="📚")
+
 PDF_PATH = "./data/BU.pdf"
 TOC_PATH = "./data/toc.json"
 IMAGE_PATH = "./images/bishop_logo.png"
@@ -45,7 +47,7 @@ log_dir.mkdir()
 # ==============================================================================
 # PAGE CONFIGURATION AND HEADER
 # ==============================================================================
-st.set_page_config(page_title="Document Analysis Hub", layout="wide", page_icon="📚")
+
 create_header(
     main_title="Academic Document Analysis Hub",
     logo_path=IMAGE_PATH,
