@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: bishopacademic
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "streamlit run app_UI.py --server.port 10000 --server.address 0.0.0.0"
+    healthCheckPath: "/"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
