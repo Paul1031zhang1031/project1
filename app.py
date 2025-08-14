@@ -18,13 +18,16 @@ from style import create_header,apply_global_styles
 # DATA LOADING & INITIALIZATION
 # ==============================================================================
 st.set_page_config(page_title="Document Analysis Hub", layout="wide", page_icon="📚")
+
 PDF_PATH = "./data/BU.pdf"
 TOC_PATH = "./data/toc.json"
 IMAGE_PATH = "./images/bishop_logo.png"
 BANNER_PATH = "./images/bishop_logo_2.jpg"
 BANNER_HEIGHT = 150
 
-#MODELS_TO_EVALUATE = ["gemma2-9b-it", "llama3-8b-8192","llama3-70b-8192"]
+groq_key = st.secrets["GROQ_API_KEY"]
+api_ninja_key = st.secrets["API_NINJA_KEY"]
+
 QA_MODELS_TO_EVALUATE = ["gemma2-9b-it", "llama3-8b-8192", "llama3-70b-8192"]
 # Based on Phase 1 results, llama3-8b is the best for summarization. We will use it exclusively.
 SUMMARY_MODEL = "llama3-70b-8192" 
@@ -47,9 +50,6 @@ log_dir.mkdir()
 # ==============================================================================
 # PAGE CONFIGURATION AND HEADER
 # ==============================================================================
-# ==============================================================================
-# PAGE CONFIGURATION AND HEADER
-# ==============================================================================
 
 create_header(
     main_title="Academic Document Analysis Hub",
@@ -57,13 +57,12 @@ create_header(
     banner_path=BANNER_PATH,
 )
 apply_global_styles()
-
 # ==============================================================================
 # MAIN APPLICATION INTERFACE -line
 # ==============================================================================
 
-
 st.divider()
+
 # ==============================================================================
 # MAIN APPLICATION INTERFACE (Simplified - No Details Button)
 # ==============================================================================
@@ -72,6 +71,7 @@ if 'qa_best_answer' not in st.session_state: st.session_state.qa_best_answer = "
 if 'summary_best_summary' not in st.session_state: st.session_state.summary_best_summary = ""
 # Add session state to store the source chapter
 if 'qa_source_chapter' not in st.session_state: st.session_state.qa_source_chapter = ""
+
 
 if not SUMMARY_DATA or TEXT_CHUNKS is None:
     st.error("Data could not be loaded. Please check your source files.")
@@ -87,7 +87,7 @@ else:
             if st.button("Get Answer", use_container_width=True, key="qa_button"):
                 if question:
                     with st.spinner("Finding relevant chapter and generating answer..."):
-                        # --- USE THE NEW, SMARTER FUNCTION ---
+                        
                         context_and_source = find_context_in_relevant_chapter(
                             question, SUMMARY_DATA
                         )
@@ -116,7 +116,7 @@ else:
 
             st.text_area("Best Answer", value=st.session_state.qa_best_answer, height=500, disabled=True)
 
-    # --- Right Column: Chapter-Based Summarizer ---
+    # Chapter-Based Summarizer 
     with col2:
         with st.container(border=True):
             st.subheader("Summarize this, please")
