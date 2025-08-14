@@ -1,3 +1,5 @@
+
+
 import streamlit as st
 from groq import Groq
 from PIL import Image
@@ -18,6 +20,11 @@ from style import create_header,apply_global_styles
 # DATA LOADING & INITIALIZATION
 # ==============================================================================
 st.set_page_config(page_title="Document Analysis Hub", layout="wide", page_icon="📚")
+
+
+
+GROQ_API_KEY = os.environ["GROQ_API_KEY"]
+API_NINJA_KEY = os.environ["API_NINJA_KEY"]
 
 PDF_PATH = "./data/BU.pdf"
 TOC_PATH = "./data/toc.json"
