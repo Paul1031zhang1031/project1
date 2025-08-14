@@ -12,13 +12,18 @@ from qa import create_document_index, find_context_in_relevant_chapter
 from summarizer_engine import load_summary_data, get_chapter_text
 from chat import get_summary, get_qa_answer
 from eval import run_consensus_evaluation
+from style import create_header,apply_global_styles
 
 # ==============================================================================
 # DATA LOADING & INITIALIZATION
 # ==============================================================================
+st.set_page_config(page_title="Document Analysis Hub", layout="wide", page_icon="📚")
 PDF_PATH = "./data/BU.pdf"
 TOC_PATH = "./data/toc.json"
 IMAGE_PATH = "./images/bishop_logo.png"
+BANNER_PATH = "./images/bishop_logo_2.jpg"
+BANNER_HEIGHT = 150
+
 #MODELS_TO_EVALUATE = ["gemma2-9b-it", "llama3-8b-8192","llama3-70b-8192"]
 QA_MODELS_TO_EVALUATE = ["gemma2-9b-it", "llama3-8b-8192", "llama3-70b-8192"]
 # Based on Phase 1 results, llama3-8b is the best for summarization. We will use it exclusively.
@@ -42,26 +47,20 @@ log_dir.mkdir()
 # ==============================================================================
 # PAGE CONFIGURATION AND HEADER
 # ==============================================================================
-st.set_page_config(page_title="Document Analysis Hub", layout="wide", page_icon="📚")
+# ==============================================================================
+# PAGE CONFIGURATION AND HEADER
+# ==============================================================================
 
-try:
-    image = Image.open(IMAGE_PATH)
-    resized_image = image.resize((300, 100))  # Resize to 300x100 pixels
+create_header(
+    main_title="Academic Document Analysis Hub",
+    logo_path=IMAGE_PATH,
+    banner_path=BANNER_PATH,
+)
+apply_global_styles()
 
-    buffered = BytesIO()
-    resized_image.save(buffered, format="PNG")
-    img_str = base64.b64encode(buffered.getvalue()).decode()
-
-    st.markdown(
-        f"""
-        <div style="text-align:center">
-            <img src="data:image/png;base64,{img_str}" alt="Resized Image" />
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-except FileNotFoundError:
-    st.warning(f"Header image not found at '{IMAGE_PATH}'.")
+# ==============================================================================
+# MAIN APPLICATION INTERFACE -line
+# ==============================================================================
 
 
 st.divider()
@@ -95,7 +94,7 @@ else:
                         
                         if context_and_source:
                             relevant_context, source_chapter = context_and_source
-                            st.session_state.qa_source_chapter = f"Source: Based on the '{source_chapter}' chapter."
+                            #st.session_state.qa_source_chapter = f"Source: Based on the '{source_chapter}' chapter."
 
                             qa_report = run_consensus_evaluation(
                                 client=groq_client,
