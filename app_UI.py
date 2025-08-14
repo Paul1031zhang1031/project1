@@ -21,10 +21,16 @@ from style import create_header,apply_global_styles
 # ==============================================================================
 st.set_page_config(page_title="Document Analysis Hub", layout="wide", page_icon="📚")
 
+# test 
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+API_NINJA_KEY = os.environ.get("API_NINJA_KEY")
 
-
-GROQ_API_KEY = os.environ["GROQ_API_KEY"]
-API_NINJA_KEY = os.environ["API_NINJA_KEY"]
+# Optional: simple check to ensure keys are loaded
+if not GROQ_API_KEY or not API_NINJA_KEY:
+    st.error("API keys are not set correctly!")
+#test ends
+#GROQ_API_KEY = os.environ["GROQ_API_KEY"]
+#API_NINJA_KEY = os.environ["API_NINJA_KEY"]
 
 PDF_PATH = "./data/BU.pdf"
 TOC_PATH = "./data/toc.json"
