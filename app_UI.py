@@ -47,7 +47,8 @@ SUMMARY_DATA = load_summary_data(PDF_PATH, TOC_PATH)
 TEXT_CHUNKS, CHUNK_EMBEDDINGS = create_document_index(PDF_PATH)
 
 try:
-    groq_client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+    #groq_client = Groq(api_key=st.secrets["GROQ_API_KEY"])
+    groq_client = Groq(api_key=GROQ_API_KEY)
 except Exception as e: 
     st.error(f"Groq API client error: {e}"); st.stop()
 
