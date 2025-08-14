@@ -1,4 +1,5 @@
-# requirements.txt
+https://download.pytorch.org/whl/cpu/torch-2.3.1%2Bcpu-cp311-cp311-linux_x86_64.whl
+https://download.pytorch.org/whl/cpu/torchvision-0.18.1%2Bcpu-cp311-cp311-linux_x86_64.whl
 
 # Core Web Framework & API Clients
 streamlit
@@ -6,7 +7,7 @@ groq
 requests
 
 # PDF and NLP Utilities
-PyMuPDF           # For 'import fitz'
+PyMuPDF
 tiktoken
 sentence-transformers
 scikit-learn
