@@ -13,7 +13,7 @@ import shutil
 from qa import create_document_index, find_context_in_relevant_chapter
 from summarizer_engine import load_summary_data, get_chapter_text
 from chat import get_summary, get_qa_answer
-from eval import run_consensus_evaluation
+from eval_UI import run_consensus_evaluation #in order to deploy on railway not use ./streamlit
 from style import create_header,apply_global_styles
 
 # ==============================================================================
