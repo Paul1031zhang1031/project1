@@ -21,7 +21,7 @@ def create_header(main_title, logo_path, banner_path):
             padding-bottom: 15px; /* Space below the top bar */
         }
         .header-logo img {
-            width: 100px; /* Logo size */
+            width: 150px; /* Logo size */
             margin-right: 15px; /* Space between logo and title */
         }
         .header-title h2 {
