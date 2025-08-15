@@ -5,6 +5,7 @@ import requests
 import time
 from datetime import datetime
 from pathlib import Path
+import os
 
 
 from chat import get_summary, get_qa_answer
