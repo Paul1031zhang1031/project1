@@ -19,7 +19,7 @@ from style import create_header,apply_global_styles
 # ==============================================================================
 # DATA LOADING & INITIALIZATION
 # ==============================================================================
-st.set_page_config(page_title="Document Analysis Hub", layout="wide", page_icon="📚")
+st.set_page_config(page_title="Academic Calendar Document Analysis Hub", layout="wide", page_icon="📚")
 
 # test 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
