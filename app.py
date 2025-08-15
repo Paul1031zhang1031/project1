@@ -17,7 +17,7 @@ from style import create_header,apply_global_styles
 # ==============================================================================
 # DATA LOADING & INITIALIZATION
 # ==============================================================================
-st.set_page_config(page_title="Document Analysis Hub", layout="wide", page_icon="📚")
+st.set_page_config(page_title="Academic Calendar Document Analysis Hub", layout="wide", page_icon="📚")
 
 PDF_PATH = "./data/BU.pdf"
 TOC_PATH = "./data/toc.json"
@@ -144,4 +144,5 @@ st.markdown(
     </div>
     """,
     unsafe_allow_html=True
+
 )
